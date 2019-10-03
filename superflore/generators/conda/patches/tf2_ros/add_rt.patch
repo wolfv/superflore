@@ -1,0 +1,13 @@
+diff --git a/tf2_ros/CMakeLists.txt b/tf2_ros/CMakeLists.txt
+index 14adf52..6b51dc5 100644
+--- a/tf2_ros/CMakeLists.txt
++++ b/tf2_ros/CMakeLists.txt
+@@ -48,7 +48,7 @@ add_library(${PROJECT_NAME}
+   src/static_transform_broadcaster.cpp
+ )
+ add_dependencies(${PROJECT_NAME} ${catkin_EXPORTED_TARGETS})
+-target_link_libraries(${PROJECT_NAME} ${catkin_LIBRARIES})
++target_link_libraries(${PROJECT_NAME} ${catkin_LIBRARIES} rt)
+ 
+ # buffer_server executable
+ add_executable(${PROJECT_NAME}_buffer_server src/buffer_server_main.cpp)

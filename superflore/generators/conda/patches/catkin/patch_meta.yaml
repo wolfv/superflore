@@ -1,0 +1,4 @@
+#%  commands:
+    - catkin_find
+    - catkin_find --help
+    - catkin_make --help

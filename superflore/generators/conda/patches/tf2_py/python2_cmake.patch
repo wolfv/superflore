@@ -1,0 +1,13 @@
+diff --git a/tf2_py/CMakeLists.txt b/tf2_py/CMakeLists.txt
+index 2336652..6c8d915 100644
+--- a/tf2_py/CMakeLists.txt
++++ b/tf2_py/CMakeLists.txt
+@@ -10,7 +10,7 @@ find_package(catkin REQUIRED COMPONENTS rospy tf2)
+ # find_package(Boost REQUIRED COMPONENTS system)
+ 
+ 
+-find_package(PythonLibs 2 REQUIRED)
++find_package(PythonLibs REQUIRED)
+ include_directories(${PYTHON_INCLUDE_PATH} ${catkin_INCLUDE_DIRS})
+ 
+ ## Uncomment this if the package has a setup.py. This macro ensures

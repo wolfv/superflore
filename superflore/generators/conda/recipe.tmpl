@@ -1,0 +1,53 @@
+package:
+  name: {{ final_package_name }}
+  version: {{ version }}
+
+source:
+  url: {{ src_uri }}
+  fn: {{ package_name }}-{{ version }}.tar.gz
+  sha256: {{ sha256 }}
+  patches:{% for item in patches %}
+    - {{ item }}
+{%- endfor %}
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - {{ "{{ compiler('cxx') }}" }}
+    - {{ "{{ compiler('c') }}" }}
+    - cmake
+  host:
+    - ros-conda-mutex * {{ ros_distro }}
+    - ros-conda-base
+    - python
+    - catkin_pkg{%- for item in build_depend %}
+    - {{ item }}
+{%- endfor %}
+  run:
+    - ros-conda-mutex * {{ ros_distro }}
+    - ros-conda-base{% for item in run_depend %}
+    - {{ item }}
+{%- endfor %}
+
+test:
+  requires:
+    - rospkg
+  commands:
+    - export ROS_ROOT=$PREFIX && python -c "import rospkg;s = rospkg.RosPack();ret = s.get_path('{{ name }}');print(ret)"
+
+about:
+  home: {{ homepage }}{% if repository %}
+  dev_url: {{ repository }}{% endif %}
+  summary: |
+    {{ description | striptags | truncate(100, end='') | indent(4) }}
+  description: |
+    {{ description | striptags | wordwrap(76) | indent(4) }}
+  license: {{ license }}
+  license_file: {{ license_file }}
+
+extra:
+  recipe-maintainers:
+    - wolfv
+    - lesteve

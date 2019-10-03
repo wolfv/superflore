@@ -27,6 +27,7 @@ def generate_installers(
     distro_name,             # ros distro name
     overlay,                 # repo instance
     gen_pkg_func,            # function to call for generating
+    filter_pkgs=[],
     preserve_existing=True,  # don't regenerate if installer exists
     *args                    # any aditional args for gen_pkg_func
 ):
@@ -39,6 +40,17 @@ def generate_installers(
     bad_installers = []
     succeeded = 0
     failed = 0
+
+    print(pkg_names)
+
+    new_pkgs = []
+    print(pkg_names)
+    if len(filter_pkgs):
+        for xp in pkg_names[0]:
+            if xp in filter_pkgs:
+                new_pkgs.append(xp)
+        pkg_names = (new_pkgs, )
+        print(pkg_names)
 
     info("Generating installers for distro '%s'" % distro_name)
     for i, pkg in enumerate(sorted(pkg_names[0])):
